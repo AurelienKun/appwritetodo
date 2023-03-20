@@ -1,3 +1,4 @@
+import 'package:appwritetodo/app/app.dart';
 import 'package:appwritetodo/helper/validators.dart';
 import 'package:appwritetodo/signup/signup.dart';
 import 'package:flutter/gestures.dart';
@@ -75,17 +76,18 @@ class LoginPage extends StatelessWidget {
                     try {
                       await AuthHelper()
                           .login(
-                            email: model.email!,
-                            password: model.password!,
-                          )
-                          .then(
-                            (value) => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => HomePage(),
-                              ),
-                            ),
-                          );
+                        email: model.email!,
+                        password: model.password!,
+                      )
+                          .then((value) {
+                        storage.setSession(value.$id);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => HomePage(),
+                          ),
+                        );
+                      });
                     } catch (e) {
                       print(e);
                       ScaffoldMessenger.of(context)
