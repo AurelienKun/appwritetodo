@@ -35,7 +35,7 @@ class _AppState extends State<App> {
       ),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      home: Splashscreen(),
+      home: const Splashscreen(),
     );
   }
 }

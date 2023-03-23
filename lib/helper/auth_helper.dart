@@ -25,7 +25,18 @@ class AuthHelper {
 
   Future<bool> logout() async {
     try {
+      await account.deleteSession(sessionId: storage.getSession());
+      storage.setSession('');
+      return true;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<bool> logoutEverywhere() async {
+    try {
       await account.deleteSessions();
+      storage.setSession('');
       return true;
     } catch (e) {
       rethrow;
@@ -41,10 +52,20 @@ class AuthHelper {
         email: email,
         password: password,
       );
+      storage.setSession(response.$id);
       return response;
     } on AppwriteException {
       rethrow;
     }
   }
 
+  Future<model.Session> loginWithSession({required String session}) async {
+    try {
+      final sessionId = storage.getSession();
+      final response = await account.getSession(sessionId: sessionId);
+      return response;
+    } on AppwriteException {
+      rethrow;
+    }
+  }
 }

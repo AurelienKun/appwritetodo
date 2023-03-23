@@ -1,11 +1,10 @@
+import 'package:appwritetodo/app/view/app.dart';
 import 'package:appwritetodo/home/home.dart';
 import 'package:appwritetodo/login/view/login_page.dart';
 import 'package:flutter/material.dart';
 
-import '../../app/view/app.dart';
-
 class Splashscreen extends StatefulWidget {
-  Splashscreen({Key? key}) : super(key: key);
+  const Splashscreen({super.key});
 
   @override
   State<Splashscreen> createState() => _SplashscreenState();
@@ -29,17 +28,18 @@ class _SplashscreenState extends State<Splashscreen> {
     await storage.init();
     final id = storage.getSession();
 
+    if (!mounted) return;
     if (id.isEmpty) {
       await Navigator.push(
         context,
-        MaterialPageRoute(
+        MaterialPageRoute<void>(
           builder: (context) => LoginPage(),
         ),
       );
     } else {
       await Navigator.push(
         context,
-        MaterialPageRoute(
+        MaterialPageRoute<void>(
           builder: (context) => HomePage(),
         ),
       );

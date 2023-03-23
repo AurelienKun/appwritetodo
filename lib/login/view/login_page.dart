@@ -1,14 +1,13 @@
 import 'package:appwritetodo/app/app.dart';
+import 'package:appwritetodo/helper/auth_helper.dart';
 import 'package:appwritetodo/helper/validators.dart';
+import 'package:appwritetodo/home/view/home_page.dart';
 import 'package:appwritetodo/signup/signup.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-import '../../helper/auth_helper.dart';
-import '../../home/view/home_page.dart';
-
 class LoginPage extends StatelessWidget {
-  LoginPage({Key? key}) : super(key: key);
+  LoginPage({super.key});
   final formKey = GlobalKey<FormState>();
   SigninModel model = SigninModel();
 
@@ -83,7 +82,7 @@ class LoginPage extends StatelessWidget {
                         storage.setSession(value.$id);
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
+                          MaterialPageRoute<void>(
                             builder: (context) => HomePage(),
                           ),
                         );
@@ -107,7 +106,7 @@ class LoginPage extends StatelessWidget {
                   ..onTap = () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
+                      MaterialPageRoute<void>(
                         builder: (context) => SignupPage(),
                       ),
                     );
