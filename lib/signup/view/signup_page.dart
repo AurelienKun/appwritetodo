@@ -117,10 +117,14 @@ class SignupPage extends StatelessWidget {
                             password: model.password!,
                             name: model.name!,
                           )
-                          .then((value) => Navigator.push(
+                          .then(
+                            (value) => Navigator.push(
                               context,
-                              MaterialPageRoute(
-                                  builder: (context) => HomePage())));
+                              MaterialPageRoute<void>(
+                                builder: (context) => HomePage(),
+                              ),
+                            ),
+                          );
                     } catch (e) {
                       print(e);
                       ScaffoldMessenger.of(context)
@@ -134,24 +138,25 @@ class SignupPage extends StatelessWidget {
                 height: 16,
               ),
               RichText(
-                  text: TextSpan(
-                text: "Vous avez déjà un compte ? C'est par ici !",
-                recognizer: TapGestureRecognizer()
-                  ..onTap = () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => LoginPage(),
-                      ),
-                    );
-                  },
-                style: const TextStyle(
-                  fontSize: 12,
-                  fontStyle: FontStyle.italic,
-                  color: Colors.blue,
-                  decoration: TextDecoration.underline,
+                text: TextSpan(
+                  text: "Vous avez déjà un compte ? C'est par ici !",
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute<void>(
+                          builder: (context) => LoginPage(),
+                        ),
+                      );
+                    },
+                  style: const TextStyle(
+                    fontSize: 12,
+                    fontStyle: FontStyle.italic,
+                    color: Colors.blue,
+                    decoration: TextDecoration.underline,
+                  ),
                 ),
-              )),
+              ),
             ],
           ),
         ),
